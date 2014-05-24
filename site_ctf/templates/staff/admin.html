@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block nav-admin %}active{% endblock %}
+{% block title %} Page admin {% endblock %}
+
+{% block content %}
+
+<h1>Administration</h1>
+
+<div class="col-sm-6">
+  <ul class="list-group">
+    <li class="list-group-item"><a href="{% url 'add_chall' %}">Ajouter une épreuve</a></li>
+    <li class="list-group-item"><a href="{% url 'add_cate' %}">Ajouter une catégorie</a></li>
+  </ul>
+ 
+  <ul class="list-group">
+    <li class="list-group-item"><a href="{% url 'view_users' %}">Voir les utilisateurs</a></li>
+    <li class="list-group-item"><a href="{% url 'view_cate' %}">Voir les catégories</a></li>
+    <li class="list-group-item"><a href="{% url 'view_challs' %}">Voir les épreuves</a></li>
+  </ul>
+</div><!-- /.col-sm-6-->
+
+{% endblock %}

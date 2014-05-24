@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Edition de la categorie{% endblock %}
+
+{% block content %}
+
+<h1>Edition de la categorie </h1>
+
+<form action="" method="post">{% csrf_token %}
+  <table>
+    {{ form|crispy }}
+  </table>
+  
+  <input type="submit" value="Modifier">
+
+</form>
+
+{% endblock %}

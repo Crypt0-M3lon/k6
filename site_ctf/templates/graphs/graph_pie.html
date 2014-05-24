@@ -1,0 +1,42 @@
+<script>
+$(function () {
+var chart;
+
+  $(document).ready(function () {
+    
+    // Build the chart
+    $('#graph_pie').highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      },
+      title: {
+        text: 'Répartition des points'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: false
+            },
+            showInLegend: true
+          }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Part des points',
+        data: [
+        {% for name, value in pie%}
+        ['{{name}}',   {{value}}],
+        {% endfor %}
+        ]
+      }]
+    });
+  });
+});
+</script>

@@ -1,0 +1,36 @@
+{% block content %}
+
+<div class="media">
+  <img class="media-object pull-left" src="{{chall.img}}" width="100" height="100" alt="">
+  <div class="media-body">
+
+    <h2 class="media-heading">{{chall.name}} - <small>{{chall.points}} points</small></h2>    
+    <p>{{chall.description|safe}}</p>
+    
+    {% if form %}
+    <form action="{% url 'validation' %}" method="post">{% csrf_token %}
+      <p> <table>{{form}} </table></p>
+      <p> <input type="submit" value="Valider"></p>
+    </form>
+
+    {% else %}
+    <div class="alert alert-success">
+      <p><small>Vous avez déjà validé cette épreuve.</small></p>
+    </div>
+    <p>
+      <a href="{{chall.url}}"><button type="button" class="btn btn-primary">
+        Accéder à l'épreuve <span class="glyphicon glyphicon-chevron-right"></span>
+      </button></a>
+    {% endif %} 
+
+    {% if user.is_staff %}
+      <a href="{% url 'edit_chall' chall.id %}"><button type="button" class="btn btn-danger">
+        <span class="glyphicon glyphicon-pencil"></span> Editer l'épreuve
+      </button></a>
+    {% endif %}
+    </p>
+  
+  </div><!-- .media-body-->
+</div><!-- .media -->
+
+{% endblock %}

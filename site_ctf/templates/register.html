@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Veuillez vous enregistrer{% endblock %}
+
+{% block content %}
+
+<h3>Enregistrez-vous pour participer au CTF :)</h3>
+
+<form action="" method="post">{% csrf_token %}
+  <div class="form-group">
+    <div class="col-md-3">
+    {{ form }}
+    <button type="submit" class="btn btn-success" name="register" value="M'enregistrer">M'enregistrer</button>
+  </div>
+</div>
+</form>
+
+{% endblock %}

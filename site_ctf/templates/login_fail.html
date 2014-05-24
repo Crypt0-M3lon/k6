@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Oups !{% endblock %}
+
+{% block content %}
+
+<h1>Oups !</h1>
+
+<div class="alert alert-danger">
+  <p><strong>Il semblerait que les identifiants entrés ne soient pas bons :(</strong></p>
+  <p>Vous allez être redirigé vers l'accueil.</p>
+  <meta http-equiv="refresh" content="2; URL={% url 'login' %}">
+</div>
+
+{% endblock %}

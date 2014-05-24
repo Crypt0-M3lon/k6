@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block highcharts %}<script src="http://code.highcharts.com/highcharts.js"></script>{% endblock %}
+{% block nav-scoreboard %}class ="active"{% endblock %}
+{% block title %}Scoreboard{% endblock %}
+
+{% block content %}
+
+<h3> Scoreboard</h3>
+
+<div id='graph_validations'>{% include 'graphs/graph_scoreboard.html' %}</div>
+
+<!-- Scoreboard starts here -->
+<div class="table-responsive">
+  <table id="table" class="table table-striped tablesorter-boostrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Utilisateur</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    {% for key, value in dic.items %}
+      <tr>
+        <td>{{key}}</td>
+      
+        <td><a href="{% url 'view_user' value.0.id %}">
+        {% if value.0.id == user.id %}
+        <strong>{{value.0}}</strong>
+        {% else %}
+        {{value.0}}
+        {% endif %}
+        </a></td>
+        
+        <td>{{value.1}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div><!-- /.table-responsive -->
+
+{% endblock %}

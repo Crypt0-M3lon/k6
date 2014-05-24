@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block carousel %}<link href="{{STATIC_URL}}bootstrap/css/carousel.css" rel="stylesheet">{% endblock %}
+{% block nav-accueil %}class ="active"{% endblock %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="{{STATIC_URL}}img/wall_01.jpg" alt="Bienvenue !">
+          <div class="container">
+            <div class="carousel-caption">
+              {% if user.is_authenticated %}
+              <img src="{{STATIC_URL}}img/logo_small.png"/><h1>Bienvenue, {{ user }} !</h1>
+                <p>Bienvenue sur la plateforme du hac|K6| !</p>
+                <p>C'est parti!</p>
+              {% else %}
+              <img src="{{STATIC_URL}}img/logo_small.png"/><h1>Bienvenue !</h1>
+                <p>Bienvenue sur la plateforme du hac|K6| !</p>
+                <p>Pour commencer le CTF, veuillez vous connecter ;)</p>
+              {% endif %}
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Connexion</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="{{STATIC_URL}}img/wall_02.jpg" alt="Règles du CTF">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Règlement</h1>
+              <p>Pour participer au CTF dans la joie et la bonne humeur, vous devrez respecter ces quelques règles :)
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Accèder aux règles</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="{{STATIC_URL}}img/wall_03.jpg" alt="Enregistrez-vous !">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Enregistrez-vous !</h1>
+              <p>Le CTF n'attends plus que vous !</p>
+              <p> Enregistrez-vous et participez, seul ou en équipe !</p>
+              <p>Have fun ;)</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">M'enregistrer</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+{% endblock %}

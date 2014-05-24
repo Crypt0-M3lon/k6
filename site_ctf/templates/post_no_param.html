@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Oups !{% endblock %}
+
+{% block content %}
+
+<h1>Oups !</h1>
+
+<div class="alert alert-danger">
+  <p><strong>Vous devez renseigner tous les champs du formulaire !</strong></p>
+  <p>Vous allez être redirigé vers le formulaire.</p>
+  <meta http-equiv="refresh" content="2; URL={% url 'login' %}">
+</div>
+
+{% endblock %}

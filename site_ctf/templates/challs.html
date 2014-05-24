@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block nav-challs %}class ="active"{% endblock %}
+{% block title %}Liste des épreuves{% endblock %}
+
+{% block content %}
+
+<h4><!-- Spacer --></h4>
+
+<!-- navigation between categories -->
+<ul class="nav nav-tabs">
+{% for categorie, challs in challs_dic.items %}
+  {% if categorie.name == 'Web' %}<li class="active"><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-globe">
+  {% elif categorie.name == 'Forensic' %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-search">
+  {% elif categorie.name == 'Reverse' %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-retweet">
+  {% elif categorie.name == 'Crypto' %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-lock">
+  {% elif categorie.name == 'Exploit' %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-cog">
+  {% elif categorie.name == 'Stegano' %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class="glyphicon glyphicon-eye-open">
+  {% else %}<li><a href="#{{categorie.name}}" data-toggle="tab"><span class ="glyphicon glyphicon-flag">{% endif %}</span> {{categorie.name}}</a></li>
+{% endfor %}
+</ul>
+
+<!-- tab-panes for each category-->
+<div class="tab-content">
+{% for categorie, challs in challs_dic.items %}
+  {% if categorie.name == 'Web' %}
+  <div class="tab-pane fade in active" id="{{categorie.name}}">
+  {% else %} 
+  <div class="tab-pane fade" id="{{categorie.name}}">
+  {% endif %}   
+  
+  <div class="caption">
+    {% if categorie.name == 'Web' %}<h3><span class="glyphicon glyphicon-globe">
+    {% elif categorie.name == 'Forensic' %}<h3><span class="glyphicon glyphicon-search">
+    {% elif categorie.name == 'Reverse' %}<h3><span class="glyphicon glyphicon-retweet">
+    {% elif categorie.name == 'Crypto' %}<h3><span class="glyphicon glyphicon-lock">
+    {% elif categorie.name == 'Exploit' %}<h3><span class="glyphicon glyphicon-cog">
+    {% elif categorie.name == 'Stegano' %}<h3><span class="glyphicon glyphicon-eye-open">
+    {% else %}<h3><span class ="glyphicon glyphicon-flag">
+    {% endif %}</span> {{categorie.name}} // <small>{{categorie.description}}</small></h3>
+  
+    <div class="row">
+      <div class="col-md-3">
+        
+        <!-- for each category we show every challenges -->
+        <ul class="nav nav-pills list-group">
+        {% for chall in challs %}
+          <a href="#{{chall.name}}" data-toggle="tab">
+            <li class="list-group-item"><span class="badge pull-right">{{chall.points}}</span> {{chall.name}}</li>
+          </a>
+        {% endfor %}
+        </ul>
+      
+      </div><!-- /.col-md-3 -->
+      
+      <div class="tab-content">
+      {% for chall in challs %}
+        {% if '01' in chall.name %}
+        <div class="tab-pane fade in active col-md-9" id="{{chall.name}}">
+        {% else %}
+        <div class="tab-pane fade col-md-9" id="{{chall.name}}">
+        {% endif %}  
+        {% include "view_chall.html" %}
+        </div><!-- /.tab-pane .col-md-9 -->
+      
+      {% endfor %}
+      </div><!-- /.tab-content -->
+    </div><!-- /.row -->
+  </div><!-- /.caption -->
+        
+  {% if user.is_staff %}
+  <p><a href="{% url 'edit_cate' categorie.id %}">
+  <button type="button" class="btn btn-m btn-danger"><span class="glyphicon glyphicon-pencil"></span> Editer la catégorie</button>
+  </a></p>
+  {% endif %}
+  </div><!-- .tab-pane {{categorie.name}} -->
+
+{% endfor %}
+</div><!-- /.tab-content -->
+{% endblock %}

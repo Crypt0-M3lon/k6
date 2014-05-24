@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block nav-admin %}active{% endblock %}
+{% block title %}Liste des épreuves{% endblock %}
+
+{% block content %}
+
+<h3>Liste des épreuves :</h3>
+
+<div class="table-responsive">
+  <table id="table" class="table table-striped tablesorter">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nom</th>
+        <th>Valeur</th>
+        <th>Catégorie</th>
+        {% if user.is_staff %}
+        <th>Edition</th>
+        {% endif %}
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for chall in challs %}
+    <tr>
+      <td>{{chall.id}}</td>
+      <td>{{chall.name}}</td>
+      <td>{{chall.points}}</td>
+      <td>{{chall.categorie.name}}</td>
+      <td><a href="{% url 'edit_chall' chall.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

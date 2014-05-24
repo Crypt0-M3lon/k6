@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block nav-admin %}active{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
+
+{% block content %}
+
+<h3>Liste des utilisateurs :</h3>
+
+<div class="table-responsive">
+  <table id="table" class="table table-striped tablesorter">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Pseudo</th>
+        <th>Activité</th>
+        <th>Mail</th>
+        <th>Staff</th>
+        {% if user.is_staff %}
+        <th>Edition</th>
+        {%endif%}
+      </tr>
+    </thead>
+    
+    <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{user.id}}</td>
+      <td>{{user}}</td>
+      <td>
+        {% if user.is_active %}
+        <span class="glyphicon glyphicon-ok green"></span>
+        {% else %} 
+        <span class="glyphicon glyphicon-remove red"></span> 
+        {% endif %}
+      </td>
+      <td>{{user.email}}</td>
+      <td>{% if user.is_staff %} Staff {%else%} User {%endif%}</td>
+      <td><a href="{% url 'edit_user' user.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

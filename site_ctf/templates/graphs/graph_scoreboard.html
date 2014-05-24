@@ -1,0 +1,50 @@
+<script>
+$(function () {
+  $('#graph_validations').highcharts({
+    chart: {
+      type: 'spline'
+    },
+    title: {
+      text: 'Evolution des scores'
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { // don't display the dummy year
+        month: '%e. %b',
+        year: '%b'
+      },
+      title: {
+        text: 'Date'
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Points'
+      },
+      min: 0
+    },
+    tooltip: {
+      formatter: function() { return '<b>Validation: ' + this.point.label +'</b><br/>' + new Date(this.point.x).toLocaleString() + ' - Total :' + this.point.y + " points";},
+      headerFormat: '<b>{point.key}</b><br>',
+      pointFormat: '{point.x:%H:%M:%S %e %b}: {point.y} points'
+    },
+    
+    series: [
+    {% for key, values in validations_graph.items %} 
+    {
+      name: '{{key}}',
+      data: [
+      {% for validation in values %}
+      {
+        x:{{validation.0}},
+        y:{{validation.1}},
+        label:'{{validation.2}}'
+      },
+      {% endfor %}
+      ]
+    },
+    {% endfor %}
+    ]
+  });
+});
+</script>

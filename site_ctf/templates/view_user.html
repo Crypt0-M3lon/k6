@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block highcharts %}<script src="http://code.highcharts.com/highcharts.js"></script>{% endblock %}
+{% block nav-view_user %}class ="active"{% endblock %}
+
+{% block content %}
+
+<h4><!-- Spacer --></h4>
+
+<ol class="breadcrumb">
+  <li><h3><span class="glyphicon glyphicon-user"></span><strong> {{user_}}</h3></strong></li>
+  
+  {% for key,value in vals.items %}
+  <li><strong>{{key}}</strong> : {{ value }} points</li>
+  {% endfor %}
+
+</ol>
+
+{% if ok_graph %}
+<div class="row">
+  <div id="graph_pie" class="col-md-1" style="width:50%; height:400px;">{% include 'graphs/graph_validations.html' %}</div>
+  <div id="graph_validations" class="col-md-1" style="width:50%; height:400px;">{% include 'graphs/graph_pie.html' %}</div>
+</div>
+{% else %}
+<p>Vous n'avez validé aucune épreuve.</p>
+{% endif %}
+
+{% endblock %}

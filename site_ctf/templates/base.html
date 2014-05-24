@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AFTeam">
+    
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}bootstrap/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}bootstrap/css/table.bootstrap.css"/>
+        
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    {% block highcharts %}{% endblock %}
+    {% block carousel %}{% endblock %}
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap-remote-tabs.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/tablesorter.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/tablesorter.widget.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/holder.js"></script> 
+    <script>
+      $(function(){
+        $('#table').tablesorter({
+          theme : "bootstrap",
+          headerTemplate: '{content} {icon}',
+          widgets    : ['zebra','columns', 'uitheme']
+        });
+      });
+    </script>
+    <title>{% block title %}{{ section.title }}{% endblock %}</title>
+</head>
+
+<body role="document">
+  <div id="wrap">
+<!-- navbar begins here-->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      
+      <a class="navbar-brand" href="{% url 'accueil' %}"><font size="6" color="#40A497">hac|K6|</font></a>
+    </div>
+    
+    {% block nav %}
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {% if user.is_authenticated %}
+        <li {% block nav-view_user %}{% endblock %}><a class="navbar-brand " href="{% url 'view_user' user.id %}">User : {{ user }}</a></li>
+        {% endif %}
+        <li {% block nav-accueil %}{% endblock %}><a href="{% url 'accueil' %}"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li {% block nav-scoreboard %}{% endblock %}><a href="{% url 'scoreboard' %}">Scoreboard</a></li>
+        <li {% block nav-reglement %}{% endblock %}><a href="{% url 'reglement' %}">Règlement</a></li> 
+        {% if user.is_authenticated %}
+        <li {% block nav-challs %}{% endblock %}><a href="{% url 'challs' %}">Epreuves</a></li>
+        
+        {% if user.is_staff %}
+        <li class="dropdown {% block nav-admin %}{% endblock %}">
+          <a href="{% url 'admin_accueil' %}" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+        
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'admin_accueil' %}"><span class="glyphicon glyphicon-home"></span> Admin</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'add_chall' %}">Ajouter une épreuve</a></li>
+            <li><a href="{% url 'add_cate' %}">Ajouter une catégorie</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'view_users' %}">Voir les utilisateurs</a></li>
+            <li><a href="{% url 'view_cate' %}">Voir les catégories</a></li>
+            <li><a href="{% url 'view_challs' %}">Voir les épreuves</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        <li {% block nav-apropos %}{% endblock %}><a href="{% url 'apropos' %}">A propos</a></li> 
+        <li{% block nav-logout %}{% endblock %}><a href="{% url 'logout' %}" name="deco"><span class="glyphicon glyphicon-off"></span></a></li>
+           
+        <!-- user is not connected -->
+        {% else %}
+        
+        <li {% block nav-login %}{% endblock %}><a href="{% url 'login' %}">Se connecter</a></li>
+        <li {% block nav-register %}{% endblock %}><a href="{% url 'register' %}">S'enregistrer</a></li>
+        {% endif %} 
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar-->
+{% endblock %} 
+
+<div id="container theme-showcase" role="main">
+  <div class="jumbotron">
+    {% block content %}
+    {% endblock %}
+  </div><!-- /.jumbotron -->
+</div><!-- /.container-->
+</div><!-- /.wrap -->
+{% include 'footer.html' %}
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block nav-login %}class="active" {% endblock %}
+{% block title %} Veuillez vous connecter {% endblock %}
+
+{% block content %}
+
+<h3>Connectez-vous pour participer au CTF :)</h3>
+
+<form action="{% url 'login' %}" method="post"> {% csrf_token %}
+  <div class="form-group">
+    <div class="col-md-3">
+      <p><input type="text" name="user" placeholder="Utilisateur" class="form-control"></p>
+      <p><input type="password" name="password" placeholder="Mot de passe" class="form-control"></p>
+      <button type="submit" class="btn btn-success" name="connexion" value="Connexion"/>Connexion</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
