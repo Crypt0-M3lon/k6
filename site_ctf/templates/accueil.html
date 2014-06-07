@@ -28,7 +28,7 @@
                 <p>Bienvenue sur la plateforme du hac|K6| !</p>
                 <p>Pour commencer le CTF, veuillez vous connecter ;)</p>
               {% endif %}
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Connexion</a></p>
+              <p><a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Connexion</a></p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="carousel-caption">
               <h1>Règlement</h1>
               <p>Pour participer au CTF dans la joie et la bonne humeur, vous devrez respecter ces quelques règles :)
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Accèder aux règles</a></p>
+              <p><a class="btn btn-lg btn-primary" href="{% url 'reglement' %}" role="button">Accèder aux règles</a></p>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
               <p>Le CTF n'attends plus que vous !</p>
               <p> Enregistrez-vous et participez, seul ou en équipe !</p>
               <p>Have fun ;)</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">M'enregistrer</a></p>
+              <p><a class="btn btn-lg btn-primary" href="{% url 'register' %}" role="button">M'enregistrer</a></p>
             </div>
           </div>
         </div>
