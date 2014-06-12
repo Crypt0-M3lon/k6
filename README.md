@@ -1,18 +1,18 @@
 ### AFTI CTF PROJECT ###
 
 ### Python : 
-pip install django
-pip install MySQL-python
-pip install django-crispy-forms
-pip install django-jquery
+- pip install django
+- pip install MySQL-python
+- pip install django-crispy-forms
+- pip install django-jquery
 
 ### General :
 
-Dès votre connection, accédez à byobu en tapant : byobu.
-Pour démarrer le serveur Django : python manage.py runserver
-Pour resynchroniser la BDD DJango : python manage.py syncdb
-Pour dumper la BDD MySQL : mysqldump -uk6 -pk6 k6 > dump_k6.sql
-Pour réinjecter la BDD MySQL : mysql -uk6 -pK6 k6 < dump_k6.sql
+- Dès votre connection, accédez à byobu en tapant : byobu.
+- Pour démarrer le serveur Django : python manage.py runserver
+- Pour resynchroniser la BDD DJango : python manage.py syncdb
+- Pour dumper la BDD MySQL : mysqldump -uk6 -pk6 k6 > dump_k6.sql
+- Pour réinjecter la BDD MySQL : mysql -uk6 -pK6 k6 < dump_k6.sql
 
 ### TODO-List :
 
