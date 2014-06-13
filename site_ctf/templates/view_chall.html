@@ -5,7 +5,9 @@
   <div class="media-body">
 
     <h2 class="media-heading">{{chall.name}} - <small>{{chall.points}} points</small></h2>    
+    <!--*****Chall starts here*****-->
     <p>{{chall.description|safe}}</p>
+    <!--*****Chall ends here*****-->
     
     {% if form %}
     <form action="{% url 'validation' %}" method="post">{% csrf_token %}
