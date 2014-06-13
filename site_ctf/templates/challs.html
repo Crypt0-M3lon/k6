@@ -43,7 +43,7 @@
         
         <!-- for each category we show every challenges -->
         <ul class="nav nav-pills list-group">
-        {% for chall in challs %}
+        {% for chall,form in challs %}
           <a href="#{{chall.name}}" data-toggle="tab">
             <li class="list-group-item"><span class="badge pull-right">{{chall.points}}</span> {{chall.name}}</li>
           </a>
@@ -53,7 +53,7 @@
       </div><!-- /.col-md-3 -->
       
       <div class="tab-content">
-      {% for chall in challs %}
+      {% for chall, form in challs %}
         {% if '01' in chall.name %}
         <div class="tab-pane fade in active col-md-9" id="{{chall.name}}">
         {% else %}

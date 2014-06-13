@@ -33,12 +33,17 @@ def reglement(request):
 def challs(request):
     challs_dic={}
     categories = Categorie.objects.all()
-
+    form = None
+    
     for categorie in categories:
         challs_dic[categorie]=[]
     challs = Challenge.objects.all()
     for chall in challs:
-        challs_dic[chall.categorie].append(chall)
+        try:
+            validated = Validation.objects.get(chall=chall, user=request.user)
+        except Validation.DoesNotExist:
+            form = ValidationForm(idChall=chall.id)
+        challs_dic[chall.categorie].append((chall, form))
 
     return render(request, 'challs.html',{'challs_dic':challs_dic})
 
