@@ -95,3 +95,20 @@ def edit_user(request, userID):
   except Challenge.DoesNotExist:
     print "User "+ userID +" not found"
     return HttpResponseRedirect('/admin/users')
+
+
+
+@permission_required('is_staff', login_url="/")
+def view_validations(request):
+    validations = Validation.objects.all()
+    return render(request,'staff/view_validations.html',{'validations':validations})
+
+@permission_required('is_staff', login_url="/")
+def delete_validation(request, validationID):
+    try:
+        Validation.objects.filter(id=validationID).delete()
+    
+    except Challenge.DoesNotExist:
+        return HttpResponseRedirect('/admin/users')
+    validations = Validation.objects.all()
+    return render(request,'staff/view_validations.html',{'validations':validations})
