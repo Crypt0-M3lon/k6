@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import permission_required
+from django.shortcuts import redirect
 
 @permission_required('is_staff', login_url="/")
 def accueil(request):
@@ -110,5 +111,4 @@ def delete_validation(request, validationID):
     
     except Challenge.DoesNotExist:
         return HttpResponseRedirect('/admin/users')
-    validations = Validation.objects.all()
-    return render(request,'staff/view_validations.html',{'validations':validations})
+    return redirect('view_validations')
