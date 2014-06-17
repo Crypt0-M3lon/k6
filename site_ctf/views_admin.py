@@ -108,7 +108,23 @@ def view_validations(request):
 def delete_validation(request, validationID):
     try:
         Validation.objects.filter(id=validationID).delete()
-    
-    except Challenge.DoesNotExist:
-        return HttpResponseRedirect('/admin/users')
+    except Validation.DoesNotExist:
+        return redirect('view_validations')
     return redirect('view_validations')
+
+
+@permission_required('is_staff', login_url="/")
+def delete_chall(request, challID):
+    try:
+        Challenge.objects.filter(id=challID).delete()
+    except Challenge.DoesNotExist:
+        return redirect('view_challs')
+    return redirect('view_challs')
+
+@permission_required('is_staff', login_url="/")
+def delete_cate(request, cateID):
+    try:
+        Categorie.objects.filter(id=cateID).delete()
+    except Categorie.DoesNotExist:
+        return redirect('view_cate')
+    return redirect('view_cate')

@@ -25,7 +25,8 @@
         <td>{{categorie.id}}</td>
         <td>{{categorie.name}}</td>
         <td>{{categorie.description}}</td>
-        <td><a href="{% url 'edit_cate' categorie.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a></td>
+        <td><a href="{% url 'edit_cate' categorie.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a>
+      <a href="{% url 'delete_cate' categorie.id %}"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
       </tr>
     {% endfor %}
     </tbody>
