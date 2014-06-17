@@ -42,7 +42,7 @@ def add_cate(request):
   if request.method == 'POST':
     if form.is_valid():
       form.save()
-      return HttpResponseRedirect("/admin")
+      return redirect('view_cate')
   return render(request,'staff/add_cate.html',{'form':form})
 
 @permission_required('is_staff', login_url="/")
@@ -51,7 +51,7 @@ def add_chall(request):
   if request.method == 'POST':
     if form.is_valid():
       form.save()
-      return HttpResponseRedirect("/challs")
+      return redirect('view_challs')
   return render(request,'staff/add_chall.html',{'form':form})
     
 @permission_required('is_staff', login_url="/")
@@ -66,8 +66,8 @@ def edit_cate(request, cateID):
         return HttpResponseRedirect('/admin/cate')
     return render(request,'staff/edit_cate.html',{'form':edit_form})
   except Categorie.DoesNotExist:
-    return HttpResponseRedirect('/admin/cate')
-
+    return redirect('view_cate')
+    
 @permission_required('is_staff', login_url="/")
 def edit_chall(request, challID):
   challenge = None
@@ -80,7 +80,7 @@ def edit_chall(request, challID):
         return HttpResponseRedirect('/admin/challs')
     return render(request,'staff/edit_chall.html',{'form':edit_form})
   except Challenge.DoesNotExist:
-    return HttpResponseRedirect('/admin/challs')
+    return redirect('view_challs')
 
 @permission_required('is_staff', login_url="/")
 def edit_user(request, userID):
@@ -93,9 +93,9 @@ def edit_user(request, userID):
         edit_form.save()
         return HttpResponseRedirect('/admin/users')
     return render(request,'staff/edit_user.html',{'form':edit_form})
-  except Challenge.DoesNotExist:
+  except User.DoesNotExist:
     print "User "+ userID +" not found"
-    return HttpResponseRedirect('/admin/users')
+    return redirect('view_users')
 
 
 
