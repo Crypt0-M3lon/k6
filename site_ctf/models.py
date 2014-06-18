@@ -21,7 +21,7 @@ class Challenge(models.Model):
     points = models.IntegerField(null=False, blank=False, db_column='points')
     url = models.CharField(max_length=255, unique=True, db_column='url')
     flag = models.CharField(max_length=255, unique=True, db_column='flag')
-    categorie = models.ForeignKey('Categorie', to_field='id', db_column='categorie')
+    categorie = models.ForeignKey('Categorie', to_field='id', blank=True, null=True, on_delete=models.SET_NULL, db_column='categorie')
     seuil = models.IntegerField(default=0, null=False, blank=False, db_column='seuil')
     private = models.BooleanField(default=True, db_column='blocked')
     class Meta:
