@@ -19,11 +19,11 @@
     <div class="alert alert-success">
       <p><small>Vous avez déjà validé cette épreuve.</small></p>
     </div>
+    {% endif %} 
     <p>
       <a href="{{chall.url}}"><button type="button" class="btn btn-primary">
         Accéder à l'épreuve <span class="glyphicon glyphicon-chevron-right"></span>
       </button></a>
-    {% endif %} 
 
     {% if user.is_staff %}
       <a href="{% url 'edit_chall' chall.id %}"><button type="button" class="btn btn-danger">
