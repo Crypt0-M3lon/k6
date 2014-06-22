@@ -104,12 +104,12 @@ def logout_user(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreateForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             return render(request, 'accueil.html')
     else:
-        form = UserCreationForm()
+        form = UserCreateForm()
     return render(request, "register.html", {'form': form})
 
 def view_user(request, userID):
