@@ -41,7 +41,7 @@ def challs(request):
     print userPoints
     for categorie in categories:
         challs_dic[categorie]=[]
-    challs = Challenge.objects.filter(private=False, seuil__lte=userPoints['value__sum'])
+    challs = Challenge.objects.filter(private=False, seuil__lte=userPoints['value__sum'], categorie__isnull=False)
     for chall in challs:
         try:
             validated = Validation.objects.get(chall=chall, user=request.user)
