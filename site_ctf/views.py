@@ -37,7 +37,7 @@ def challs(request):
     
     for categorie in categories:
         challs_dic[categorie]=[]
-    challs = Challenge.objects.all()
+    challs = Challenge.objects.filter(private=False)
     for chall in challs:
         try:
             validated = Validation.objects.get(chall=chall, user=request.user)
