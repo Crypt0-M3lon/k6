@@ -19,7 +19,7 @@ class Challenge(models.Model):
     img = models.CharField(max_length=255, unique=False, db_column='img')
     description = models.TextField(db_column='description')
     points = models.IntegerField(null=False, blank=False, db_column='points')
-    url = models.CharField(max_length=255, unique=True, db_column='url')
+    url = models.CharField(max_length=255, blank=True, null=True, unique=True, db_column='url')
     flag = models.CharField(max_length=255, unique=True, db_column='flag')
     categorie = models.ForeignKey('Categorie', to_field='id', blank=True, null=True, on_delete=models.SET_NULL, db_column='categorie')
     seuil = models.IntegerField(default=0, null=False, blank=False, db_column='seuil')
