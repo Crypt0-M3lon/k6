@@ -34,10 +34,14 @@ def challs(request):
     challs_dic={}
     categories = Categorie.objects.all()
     form = None
-    
+
+    userPoints = Validation.objects.filter(user=request.user).aggregate(Sum('value'))
+    if userPoints['value__sum'] is None:
+        userPoints['value__sum']=0
+    print userPoints
     for categorie in categories:
         challs_dic[categorie]=[]
-    challs = Challenge.objects.filter(private=False)
+    challs = Challenge.objects.filter(private=False, seuil__lte=userPoints['value__sum'])
     for chall in challs:
         try:
             validated = Validation.objects.get(chall=chall, user=request.user)
