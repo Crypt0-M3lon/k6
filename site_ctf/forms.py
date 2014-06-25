@@ -10,7 +10,7 @@ class UserCreateForm(UserCreationForm):
     # first password field
     password1 = forms.CharField(label="Mot de passe",widget=forms.PasswordInput)
     # confirm password field
-    password2 = forms.CharField(label="Répétez votre mot de passe",widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirmez votre mot de passe",widget=forms.PasswordInput)
     email = forms.EmailField(label = "Adresse e-mail")
  
     # this sets the order of the fields
