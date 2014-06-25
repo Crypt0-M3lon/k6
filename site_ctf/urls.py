@@ -39,6 +39,6 @@ urlpatterns = patterns('site_ctf.views',
     url(r'^login', 'login_user', name='login'),
     url(r'^logout', 'logout_user', name='logout'),
     url(r'^register', 'register', name='register'),
-
+    url(r'^activate/(?P<codeID>[a-f0-9]{32})', 'activate', name='activate'),
     )
 

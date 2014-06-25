@@ -13,6 +13,14 @@ class Categorie(models.Model):
     def __str__(self):
         return self.name
 
+class ActivateUser(models.Model):
+    activationCode = models.CharField(max_length=32, primary_key=True, db_column='activationCode')
+    user = models.ForeignKey(User)
+    timestamp = models.DateTimeField(default=lambda :datetime.now(), db_column='timestamp')
+    class Meta:
+        db_table = 'ActivateUser'
+
+
 class Challenge(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=45, unique=True, db_column='name')

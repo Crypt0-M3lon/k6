@@ -20,6 +20,9 @@ from django.views.defaults import server_error as default_server_error
 import operator
 from django.contrib.auth.decorators import login_required
 import calendar
+import uuid
+from django.shortcuts import redirect
+
 
 def accueil(request):
     return render(request, 'accueil.html')
@@ -30,6 +33,7 @@ def apropos(request):
 def reglement(request):
     return render(request, 'reglement.html')
 
+@login_required
 def challs(request):
     challs_dic={}
     categories = Categorie.objects.all()
@@ -111,10 +115,25 @@ def register(request):
         form = UserCreateForm(request.POST)
         if form.is_valid():
             new_user = form.save()
+            new_user.is_active = False
+            new_user.save()
+            activation = ActivateUser()
+            activation.user=new_user
+            activation.activationCode=uuid.uuid1().hex
+            activation.save()
+    #TODO : sendmail
             return render(request, 'accueil.html')
     else:
         form = UserCreateForm()
     return render(request, "register.html", {'form': form})
+
+def activate(request, codeID):
+    activation = ActivateUser.objects.get(activationCode=codeID)
+    user = activation.user
+    user.is_active = True
+    user.save()
+    activation.delete()
+    return render(request, 'activated.html')
 
 def view_user(request, userID):
     ok_graph = True
