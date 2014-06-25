@@ -128,12 +128,15 @@ def register(request):
     return render(request, "register.html", {'form': form})
 
 def activate(request, codeID):
-    activation = ActivateUser.objects.get(activationCode=codeID)
-    user = activation.user
-    user.is_active = True
-    user.save()
-    activation.delete()
-    return render(request, 'activated.html')
+    try:
+        activation = ActivateUser.objects.get(activationCode=codeID)
+        user = activation.user
+        user.is_active = True
+        user.save()
+        activation.delete()
+        return render(request, 'activated.html')
+    except:
+        return redirect('accueil')
 
 def view_user(request, userID):
     ok_graph = True
