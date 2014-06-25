@@ -62,8 +62,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'k6',
-	  'USER': 'k6',
-	  'PASSWORD': 'k6',
+	  'USER': 'root',
+	  'PASSWORD': 'root',
 	  'HOST': 'localhost',
 	  'PORT': '3306',
     }
@@ -92,3 +92,21 @@ TEMPLATE_DIRS = ('/k6/site_ctf/templates',)
 
 LOGIN_URL='/login'
 LOGOUT_URL='/logout'
+
+
+
+
+
+#email
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = "k6.afteam"
+
+EMAIL_HOST_PASSWORD = ""
+
+DEFAULT_FROM_EMAIL = "k6.afteam@gmail.com"
