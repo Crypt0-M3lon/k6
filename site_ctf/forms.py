@@ -6,12 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UserCreateForm(UserCreationForm):
     # declare the fields you will show
-    username = forms.CharField(label="Your Username")
+    username = forms.CharField(label="Pseudo")
     # first password field
-    password1 = forms.CharField(label="Your Password",widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Mot de passe",widget=forms.PasswordInput)
     # confirm password field
-    password2 = forms.CharField(label="Repeat Your Password",widget=forms.PasswordInput)
-    email = forms.EmailField(label = "Email Address")
+    password2 = forms.CharField(label="Répétez votre mot de passe",widget=forms.PasswordInput)
+    email = forms.EmailField(label = "Adresse e-mail")
  
     # this sets the order of the fields
     class Meta:
