@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{% endblock %}
+{% block title %}Compte activé{% endblock %}
 
 {% block content %}
-Compte activé!
+
+<h1></h1>
+<div class="alert alert-success"> 
+  <p>Compte activé!</p>
+  <meta http-equiv="refresh" content="1; URL={% url 'accueil' %}">
+</div>
 {% endblock %}
