@@ -90,5 +90,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ('/k6/site_ctf/templates/bootstrap',)
 TEMPLATE_DIRS = ('/k6/site_ctf/templates',)
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 LOGIN_URL='/login'
 LOGOUT_URL='/logout'

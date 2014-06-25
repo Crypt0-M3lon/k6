@@ -1,18 +1,26 @@
 from django import forms
 from models import *
 from crispy_forms.helper import FormHelper
-
+from crispy_forms.layout import Layout, Field, ButtonHolder, Submit
+from crispy_forms.bootstrap import PrependedText
 from django.contrib.auth.forms import UserCreationForm
 
 class UserCreateForm(UserCreationForm):
-    # declare the fields you will show
-    username = forms.CharField(label="Pseudo")
-    # first password field
-    password1 = forms.CharField(label="Mot de passe",widget=forms.PasswordInput)
-    # confirm password field
-    password2 = forms.CharField(label="Confirmez votre mot de passe",widget=forms.PasswordInput)
-    email = forms.EmailField(label = "Adresse e-mail")
- 
+    helper = FormHelper()
+    helper.form_tag = False
+    helper.form_show_labels = False
+    helper.help_text_inline = True
+    helper.layout = Layout(
+
+      # declare the fields you will show
+      Field('username', placeholder="Nom d'utilisateur"),
+      # first password field
+      Field('password1', placeholder="Mot de passe"),
+      # confirm password field
+      Field('password2',placeholder="Confirmez votre mot de passe"),
+    
+      PrependedText('email','@',placeholder="E-mail")
+    )
     # this sets the order of the fields
     class Meta:
         model = User
