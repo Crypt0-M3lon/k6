@@ -7,9 +7,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UserCreateForm(UserCreationForm):
     helper = FormHelper()
-    helper.form_tag = False
+    helper.form_tag = True
     helper.form_show_labels = False
     helper.help_text_inline = True
+    helper.add_input(Submit('submit', 'Go!'))
     helper.layout = Layout(
 
       # declare the fields you will show
