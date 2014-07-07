@@ -42,13 +42,13 @@ def challs(request):
     userPoints = Validation.objects.filter(user=request.user).aggregate(Sum('value'))
     if userPoints['value__sum'] is None:
         userPoints['value__sum']=0
-    print userPoints
     for categorie in categories:
         challs_dic[categorie]=[]
     challs = Challenge.objects.filter(private=False, seuil__lte=userPoints['value__sum'], categorie__isnull=False)
     for chall in challs:
         try:
             validated = Validation.objects.get(chall=chall, user=request.user)
+            form = None
         except Validation.DoesNotExist:
             form = ValidationForm(idChall=chall.id)
         challs_dic[chall.categorie].append((chall, form))
