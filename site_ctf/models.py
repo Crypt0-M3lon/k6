@@ -24,7 +24,7 @@ class ActivateUser(models.Model):
 class Challenge(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=45, unique=True, db_column='name')
-    img = models.CharField(max_length=255, unique=False, db_column='img')
+    img = models.CharField(max_length=255, unique=False, db_column='img',default='http://k6.afteam.fr/static/img/logo_small.png')
     description = models.TextField(db_column='description')
     points = models.IntegerField(null=False, blank=False, db_column='points')
     url = models.CharField(max_length=255, blank=True, null=True, unique=True, db_column='url')
