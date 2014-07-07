@@ -111,35 +111,39 @@ def logout_user(request):
     return render(request, 'logout.html')
 
 def register(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST)
-        if form.is_valid():
-            new_user = form.save()
-            new_user.is_active = False
-            new_user.save()
-            code = uuid.uuid1().hex
-            content = """
-            Merci de vous être inscrit sur k6 !
-            Pour compléter votre inscription et participer au CTF, veuillez cliquer sur le lien ci-dessous :
-            http://k6.afteam.fr/activate/"""+code +"""
+    if not request.user.is_authenticated():
+        if request.method == 'POST':
+            form = UserCreateForm(request.POST)
+            if form.is_valid():
+                new_user = form.save()
+                new_user.is_active = False
+                new_user.save()
+                code = uuid.uuid1().hex
+                content = """
+                Merci de vous être inscrit sur k6 !
+                Pour compléter votre inscription et participer au CTF, veuillez cliquer sur le lien ci-dessous :
+                http://k6.afteam.fr/activate/"""+code +"""
 
-            Attention, le lien ne sera plus valide sous 48h. Passé ce délai vous devrez refaire une demande d'inscription.
+                Attention, le lien ne sera plus valide sous 48h. Passé ce délai vous devrez refaire une demande d'inscription.
 
-            Pour tout renseignement, envoyez un mail à K6. AFTeam@gmail.com
+                Pour tout renseignement, envoyez un mail à K6. AFTeam@gmail.com
 
-            L'équipe AFTeam.
-            """
-            if not send_mail('Activation du compte K6',content,'k6.afteam@gmail.com',[new_user.email]):
-                print error
-                return render(request, "register.html", {'form': form})
-            activation = ActivateUser()
-            activation.user=new_user
-            activation.activationCode=code
-            activation.save()
-            return render(request, 'mail_sent.html')
+                L'équipe AFTeam.
+                """
+                if not send_mail('Activation du compte K6',content,'k6.afteam@gmail.com',[new_user.email]):
+                    print error
+                    return render(request, "register.html", {'form': form})
+                activation = ActivateUser()
+                activation.user=new_user
+                activation.activationCode=code
+                activation.save()
+                return render(request, 'mail_sent.html')
+        else:
+            form = UserCreateForm()
+        return render(request, "register.html", {'form': form})
     else:
-        form = UserCreateForm()
-    return render(request, "register.html", {'form': form})
+        return redirect('accueil')
+
 
 def activate(request, codeID):
     try:
