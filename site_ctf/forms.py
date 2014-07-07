@@ -3,7 +3,7 @@ from models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder, Submit
 from crispy_forms.bootstrap import PrependedText
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class UserCreateForm(UserCreationForm):
     helper = FormHelper()
@@ -30,6 +30,34 @@ class UserCreateForm(UserCreationForm):
     # this redefines the save function to include the fields you added
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
+
+class UserEditProfile(UserChangeForm):
+    helper = FormHelper()
+    helper.form_tag = True
+    helper.form_show_labels = True
+    helper.help_text_inline = True
+    helper.add_input(Submit('submit', 'Modifier'))
+    helper.layout = Layout(
+      
+    Field('username', label="Nom d'utilisateur :"),
+    Field('email',label="E-mail"),
+    Field('is_staff', label="Statut : "),
+    Field('is_active', label="Actif ou pas ?"),
+    Field('password', type="hidden"),
+
+    )
+    # this sets the order of the fields
+    class Meta:
+        model = User
+        fields = ("email", "username", "password","is_staff", "is_active")
+ 
+    # this redefines the save function to include the fields you added
+    def save(self, commit=True):
+        user = super(UserEditProfile, self).save(commit=False)
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()

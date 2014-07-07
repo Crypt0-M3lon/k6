@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}Edition de l'utilisateur{% endblock %}
 
 {% block content %}
 
 <h1>Edition de l'utilisateur </h1>
 
-<form action="" method="post">{% csrf_token %}
-  <table>
-    {{ form }}
-  </table>
-  
-  <input type="submit" value="Modifier">
+ <div class="form-group">
+         <div class="col-md-3">
+           {% crispy form %}
+  </div> 
+  </div> 
 
-</form>
 
 {% endblock %}

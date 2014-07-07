@@ -87,7 +87,7 @@ def edit_user(request, userID):
   user = None
   try:
     user = User.objects.get(id=userID)
-    edit_form = UserChangeForm(request.POST or None, instance=user)
+    edit_form = UserEditProfile(request.POST or None, instance=user)
     if request.method == 'POST':
       if edit_form.is_valid():
         edit_form.save()
@@ -96,8 +96,6 @@ def edit_user(request, userID):
   except User.DoesNotExist:
     print "User "+ userID +" not found"
     return redirect('view_users')
-
-
 
 @permission_required('is_staff', login_url="/")
 def view_validations(request):
