@@ -35,7 +35,8 @@
       </td>
       <td>{{user.email}}</td>
       <td>{% if user.is_staff %} Staff {%else%} User {%endif%}</td>
-      <td><a href="{% url 'edit_user' user.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a></td>
+      <td><a href="{% url 'edit_user' user.id %}"><span class="glyphicon glyphicon-pencil"></span> Editer</a>
+      <a href="{% url 'delete_user' user.id %}"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
     </tr>
     {% endfor %}
     </tbody>
