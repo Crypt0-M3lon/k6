@@ -126,3 +126,11 @@ def delete_cate(request, cateID):
     except Categorie.DoesNotExist:
         return redirect('view_cate')
     return redirect('view_cate')
+
+@permission_required('is_staff', login_url="/")
+def delete_user(request, userID):
+    try:
+        User.objects.filter(id=userID).delete()
+    except User.DoesNotExist:
+        return redirect('view_cate')
+    return redirect('view_users')
