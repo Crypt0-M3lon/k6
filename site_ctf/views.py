@@ -136,8 +136,7 @@ def register(request):
             activation.user=new_user
             activation.activationCode=code
             activation.save()
-    #TODO : sendmail
-            return render(request, 'accueil.html')
+            return render(request, 'mail_sent.html')
     else:
         form = UserCreateForm()
     return render(request, "register.html", {'form': form})
