@@ -22,12 +22,12 @@
     {% endif %} 
     <p>
     {% if chall.url %}
-      <a href="{{chall.url}}"><button type="button" class="btn btn-primary">
+      <a href="{{chall.url}}" target="_blank"><button type="button" class="btn btn-primary">
         Accéder à l'épreuve <span class="glyphicon glyphicon-chevron-right"></span>
       </button></a>
     {% endif %}
     {% if user.is_staff %}
-      <a href="{% url 'edit_chall' chall.id %}" target="_blank"><button type="button" class="btn btn-danger">
+      <a href="{% url 'edit_chall' chall.id %}"><button type="button" class="btn btn-danger">
         <span class="glyphicon glyphicon-pencil"></span> Editer l'épreuve
       </button></a>
     {% endif %}
