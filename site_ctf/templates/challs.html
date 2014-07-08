@@ -45,7 +45,11 @@
         <ul class="nav nav-pills list-group">
         {% for chall,form in challs %}
           <a href="#{{chall.name}}" data-toggle="tab">
-            <li class="list-group-item"><span class="badge pull-right">{{chall.points}}</span> {{chall.name}}</li>
+            <li class="list-group-item">{{chall.name}} 
+            {% if not form %}
+            <span class="glyphicon glyphicon-ok green"></span>
+            {% endif %}
+            <span class="badge pull-right">{{chall.points}}</span></li>
           </a>
         {% endfor %}
         </ul>
@@ -54,11 +58,7 @@
       
       <div class="tab-content">
       {% for chall, form in challs %}
-        {% if '01' in chall.name %}
-        <div class="tab-pane fade in active col-md-9" id="{{chall.name}}">
-        {% else %}
         <div class="tab-pane fade col-md-9" id="{{chall.name}}">
-        {% endif %}  
         {% include "view_chall.html" %}
         </div><!-- /.tab-pane .col-md-9 -->
       
