@@ -22,13 +22,13 @@
               {% if user.is_authenticated %}
               <img src="{{STATIC_URL}}img/logo_small.png"/><h1>Bienvenue, {{ user }} !</h1>
                 <p>Bienvenue sur la plateforme du hac|K6| !</p>
-                <p>C'est parti!</p>
+                <p>C'est parti !</p>
               {% else %}
               <img src="{{STATIC_URL}}img/logo_small.png"/><h1>Bienvenue !</h1>
                 <p>Bienvenue sur la plateforme du hac|K6| !</p>
                 <p>Pour commencer le CTF, veuillez vous connecter ;)</p>
-              {% endif %}
               <p><a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Connexion</a></p>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -42,6 +42,7 @@
             </div>
           </div>
         </div>
+        {% if not user.is_authenticated %}
         <div class="item">
           <img src="{{STATIC_URL}}img/wall_03.jpg" alt="Enregistrez-vous !">
           <div class="container">
@@ -53,7 +54,8 @@
               <p><a class="btn btn-lg btn-primary" href="{% url 'register' %}" role="button">M'enregistrer</a></p>
             </div>
           </div>
-        </div>
+          </div>
+          {% endif %}
       </div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
