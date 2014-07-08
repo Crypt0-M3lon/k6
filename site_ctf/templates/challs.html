@@ -8,7 +8,7 @@
 
 <!-- navigation between categories -->
 <ul class="nav nav-tabs">
-{% for categorie, challs  in challs_dic.items %}
+{% for categorie, validation  in challs_validation.items %}
 
   {% if categorie.name == 'Web' %}
 
@@ -33,7 +33,7 @@
   <li><a href="#{{categorie.name}}" data-toggle="tab">
   <span class ="glyphicon glyphicon-flag"> {{categorie.name}}
   {% endif %}
-  <span class="label label-info">{{ challs|length }}</span></a>
+  <span class="label label-info">{{ validation }}</span></a>
 {% endfor %}
 </ul>
 

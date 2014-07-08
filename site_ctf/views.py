@@ -36,6 +36,7 @@ def reglement(request):
 @login_required
 def challs(request):
     challs_dic={}
+    challs_validation={}
     categories = Categorie.objects.all()
     form = None
 
@@ -44,6 +45,7 @@ def challs(request):
         userPoints['value__sum']=0
     for categorie in categories:
         challs_dic[categorie]=[]
+        challs_validation[categorie]=0
     challs = Challenge.objects.filter(private=False, seuil__lte=userPoints['value__sum'], categorie__isnull=False)
     for chall in challs:
         try:
@@ -51,9 +53,11 @@ def challs(request):
             form = None
         except Validation.DoesNotExist:
             form = ValidationForm(idChall=chall.id)
+            challs_validation[chall.categorie]=challs_validation[chall.categorie]+1
         challs_dic[chall.categorie].append((chall, form))
 
-    return render(request, 'challs.html',{'challs_dic':challs_dic})
+
+    return render(request, 'challs.html',{'challs_dic':challs_dic,'challs_validation':challs_validation})
 
 @login_required
 def view_chall(request, challID):
