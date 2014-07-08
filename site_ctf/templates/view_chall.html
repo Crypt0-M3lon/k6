@@ -27,7 +27,7 @@
       </button></a>
     {% endif %}
     {% if user.is_staff %}
-      <a href="{% url 'edit_chall' chall.id %}"><button type="button" class="btn btn-danger">
+      <a href="{% url 'edit_chall' chall.id %}" target="_blank"><button type="button" class="btn btn-danger">
         <span class="glyphicon glyphicon-pencil"></span> Editer l'épreuve
       </button></a>
     {% endif %}
