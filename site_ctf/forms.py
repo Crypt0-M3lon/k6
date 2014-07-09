@@ -26,6 +26,10 @@ class UserCreateForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("email", "username", "password1", "password2", )
+    
+    def __init__(self, *args, **kwargs):
+        super(UserCreateForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
  
     # this redefines the save function to include the fields you added
     def save(self, commit=True):
