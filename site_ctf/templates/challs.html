@@ -62,7 +62,7 @@
         <!-- for each category we show every challenges -->
         <ul class="nav nav-pills list-group">
         {% for chall,form in challs %}
-          <a href="#{{chall.name}}" data-toggle="tab">
+          <a href="#{{chall.name|slugify}}" data-toggle="tab">
             <li class="list-group-item">{{chall.name}} 
             {% if not form %}
             <span class="glyphicon glyphicon-ok green"></span>
@@ -76,7 +76,7 @@
       
       <div class="tab-content">
       {% for chall, form in challs %}
-        <div class="tab-pane fade col-md-9" id="{{chall.name}}">
+        <div class="tab-pane fade col-md-9" id="{{chall.name|slugify}}">
         {% include "view_chall.html" %}
         </div><!-- /.tab-pane .col-md-9 -->
       
