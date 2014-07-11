@@ -205,7 +205,7 @@ def view_user(request, userID):
             validations_all[chall.categorie.name].append((calendar.timegm(validation.timestamp.utctimetuple())*1000,total_points_categorie[chall.categorie.name],print_chall))
         return render(request, 'view_user.html',{'user_':u,'vals':dic,'ok_graph':ok_graph,'pie':pie, 'validations':validations_total, 'validations_all':validations_all})
     except User.DoesNotExist:
-        return None
+        return redirect('accueil')
 
 def view_scoreboard(request):
     user_point = []
