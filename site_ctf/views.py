@@ -14,7 +14,7 @@ from django.contrib.sessions.backends.db import SessionStore
 from models import *
 from forms import *
 from django.template import *
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.views.defaults import page_not_found as default_page_not_found
 from django.views.defaults import server_error as default_server_error 
 import operator
@@ -223,11 +223,11 @@ def view_scoreboard(request):
         if user_validations: 
             validations_graph[user]=user_validations
         value = validations.aggregate(Sum('value'))['value__sum']
+        date = validations.aggregate(Max('timestamp'))['timestamp__max']
         if value is None:
             value=0
-        user_point.append((user,value))
-    user_point=sorted(user_point,key=operator.itemgetter(1))
-    user_point.reverse()
+        user_point.append((user,value, date))
+    user_point=sorted(user_point,key=operator.itemgetter(1),reverse=True)
    
     dic={}
     i=1
